@@ -1,30 +1,32 @@
 
 <template>
-<div>
-<van-card
-  num="0"
-  price="2.00"
-  desc="积分信息"
-  title="杨展硕"
-  currency=""
-  thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-/>
-</div>
+  <div>
+    <van-cell-group>
+      <van-cell is-link  size="large">
+        <!-- 使用 title 插槽来自定义标题 -->
+        <template>
+          <van-row>
+            <van-col span="8" icon="/yzs.jpg"
+              ></van-col>
+            <van-col span="16" center>
+              <span class="custom-title">杨展硕</span>
+              
+              <div class="van-hairline--top"></div>
+              </van-col
+            >
+          </van-row>
+        </template>
+      </van-cell>
+    </van-cell-group>
+  </div>
 </template>
 <script>
 export default {
   data() {
-    return {
-      
-    }
+    return {};
   },
-  created() {
-
-  },
-  mounted() {
-
-  },
-  methods: {
-  }
-}
+  created() {},
+  mounted() {},
+  methods: {},
+};
 </script>
