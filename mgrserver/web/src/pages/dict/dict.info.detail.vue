@@ -47,7 +47,7 @@
                     <div class="pull-right" style="margin-right: 10px">状态:</div>
                   </el-col>
                   <el-col :span="6">
-                    <div>{{ info.status |  fltrNumberFormat(0)}}</div>
+                    <div :class="info.status|fltrTextColor">{{ info.status | fltrEnum("status") }}</div>
                   </el-col>                 
                   <el-col :span="6">
                     <div class="pull-right" style="margin-right: 10px">排序值:</div>

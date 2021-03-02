@@ -2,12 +2,6 @@
   <!-- Add Form -->
   <el-dialog title="添加惩罚信息" width="25%" :visible.sync="dialogAddVisible">
     <el-form :model="addData"  :rules="rules" ref="addForm" label-width="110px">
-      <el-form-item label="编号" prop="pn_id">
-				<el-input size="medium" maxlength="10"
-				 clearable v-model="addData.pn_id" placeholder="请输入编号">
-				</el-input>
-      </el-form-item>
-      
       <el-form-item label="名称" prop="pn_name">
 				<el-input size="medium" maxlength="64"
 				 clearable v-model="addData.pn_name" placeholder="请输入名称">
@@ -52,7 +46,6 @@ export default {
 			category:this.$enum.get("category"),
 			status:this.$enum.get("status"),
 			rules: {                    //数据验证规则
-				pn_id: [{ required: true, message: "请输入编号", trigger: "blur" }],
 				pn_name: [{ required: true, message: "请输入名称", trigger: "blur" }],
 				category: [{ required: true, message: "请输入分类", trigger: "blur" }],
 				score: [{ required: true, message: "请输入分数", trigger: "blur" }],

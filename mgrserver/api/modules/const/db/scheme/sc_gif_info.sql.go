@@ -10,4 +10,4 @@ const sc_gif_info=`
 		status tinyint default 0 not null  comment '状态' ,
 		create_time datetime default current_timestamp not null  comment '创建时间' 
 		,primary key (gif_id)
-	) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='礼品信息'`
+	) ENGINE=InnoDB auto_increment = 1000 DEFAULT CHARSET=utf8mb4 COMMENT='礼品信息'`

@@ -10,7 +10,7 @@ import (
 	
 )
 
-//ScoreRecordHandler 兑换记录处理服务
+//ScoreRecordHandler 分数记录处理服务
 type ScoreRecordHandler struct {
 }
 
@@ -18,10 +18,10 @@ func NewScoreRecordHandler() *ScoreRecordHandler {
 	return &ScoreRecordHandler{}
 }
 
-//PostHandle 添加兑换记录数据
+//PostHandle 添加分数记录数据
 func (u *ScoreRecordHandler) PostHandle(ctx hydra.IContext) (r interface{}) {
 
-	ctx.Log().Info("--------添加兑换记录数据--------")
+	ctx.Log().Info("--------添加分数记录数据--------")
 	
 	ctx.Log().Info("1.参数校验")
 	if err := ctx.Request().CheckMap(postScoreRecordCheckFields); err != nil {
@@ -39,10 +39,10 @@ func (u *ScoreRecordHandler) PostHandle(ctx hydra.IContext) (r interface{}) {
 }
 
 
-//GetHandle 获取兑换记录单条数据
+//GetHandle 获取分数记录单条数据
 func (u *ScoreRecordHandler) GetHandle(ctx hydra.IContext) (r interface{}) {
 
-	ctx.Log().Info("--------获取兑换记录单条数据--------")
+	ctx.Log().Info("--------获取分数记录单条数据--------")
 
 	ctx.Log().Info("1.参数校验")
 	if err := ctx.Request().CheckMap(getScoreRecordCheckFields); err != nil {
@@ -62,10 +62,10 @@ func (u *ScoreRecordHandler) GetHandle(ctx hydra.IContext) (r interface{}) {
 	return items.Get(0)
 }
 
-//QueryHandle  获取兑换记录数据列表
+//QueryHandle  获取分数记录数据列表
 func (u *ScoreRecordHandler) QueryHandle(ctx hydra.IContext) (r interface{}) {
 
-	ctx.Log().Info("--------获取兑换记录数据列表--------")
+	ctx.Log().Info("--------获取分数记录数据列表--------")
 
 	ctx.Log().Info("1.参数校验")
 	if err := ctx.Request().CheckMap(queryScoreRecordCheckFields); err != nil {
@@ -95,10 +95,10 @@ func (u *ScoreRecordHandler) QueryHandle(ctx hydra.IContext) (r interface{}) {
 		"count": types.GetInt(count),
 	}
 }
-//PutHandle 更新兑换记录数据
+//PutHandle 更新分数记录数据
 func (u *ScoreRecordHandler) PutHandle(ctx hydra.IContext) (r interface{}) {
 
-	ctx.Log().Info("--------更新兑换记录数据--------")
+	ctx.Log().Info("--------更新分数记录数据--------")
 
 	ctx.Log().Info("1.参数校验")
 	if err := ctx.Request().CheckMap(updateScoreRecordCheckFields); err != nil {
@@ -116,9 +116,9 @@ func (u *ScoreRecordHandler) PutHandle(ctx hydra.IContext) (r interface{}) {
 }
 
 var postScoreRecordCheckFields = map[string]interface{}{
+	field.FieldUid:"required",
 	field.FieldCTp:"required",
 	field.FieldScore:"required",
-	field.FieldRemain:"required",
 	}
 
 var getScoreRecordCheckFields = map[string]interface{}{
@@ -133,7 +133,6 @@ var queryScoreRecordCheckFields = map[string]interface{}{
 var updateScoreRecordCheckFields = map[string]interface{}{
 	field.FieldCTp:"required",
 	field.FieldScore:"required",
-	field.FieldRemain:"required",
 	}
 
 

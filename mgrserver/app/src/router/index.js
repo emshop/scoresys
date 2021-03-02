@@ -13,18 +13,24 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'index',
+      path: '/home',
+      name: 'home',
       component: () => import('../pages/system/menus.vue'),
       children:[
         {
-        path: 'home',
-        name: 'home',
+        path: 'index',
+        name: 'index',
         component: () => import('../pages/home/index.vue'),
         meta: { title: "首页" }
-        },
+        }
       ]
-    }
+    },
+    {
+      path: '/score',
+      name: '/score',
+      component: () => import('../pages/score/index.vue'),
+      meta: { title: "积分" }
+      },
   ]
 })
 

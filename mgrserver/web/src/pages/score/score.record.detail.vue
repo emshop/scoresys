@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="tabName" type="border-card" @tab-click="handleClick">
-      <el-tab-pane label="兑换记录" name="ScoreRecordDetail">
+      <el-tab-pane label="分数记录" name="ScoreRecordDetail">
         <div class="table-responsive">
           <table :date="info" class="table table-striped m-b-none">
             <tbody class="table-border">

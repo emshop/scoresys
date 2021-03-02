@@ -4,7 +4,6 @@ const InsertPunishmentInfo = `
 insert into sc_punishment_info
 (
 	pn_id,
-	pn_id,
 	pn_name,
 	category,
 	score,
@@ -13,7 +12,6 @@ insert into sc_punishment_info
 values
 (
 	@pn_id,
-	if(isnull(@pn_id)||@pn_id='',0,@pn_id),
 	@pn_name,
 	if(isnull(@category)||@category='',0,@category),
 	if(isnull(@score)||@score='',0,@score),

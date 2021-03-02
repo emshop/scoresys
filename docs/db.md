@@ -26,10 +26,10 @@ After: After(字段名) //在某个字段后面
 
 | 字段名      | 类型         | 默认值  | 为空  |       约束       | 描述     |
 | ----------- | ------------ | :-----: | :---: | :--------------: | :------- |
-| rw_id       | number(10)   |  10000  |  否   |  PK,SEQ,DI,l,r   | 编号     |
+| rw_id       | number(10)   |  10000  |  否   |    PK,SEQ,l,r    | 编号     |
 | rw_name     | varchar2(64) |         |  否   | DN,u,l,r,l,r,c,q | 名称     |
 | category    | number(2)    |    0    |  否   |   q,u,l,r,c,sl   | 分类     |
-| score       | number(10)   |    0    |  否   |     u,l,r,c      | 分数     |
+| score       | number(10)   |    0    |  否   |    DI,u,l,r,c    | 分数     |
 | status      | number(1)    |    0    |  否   | u,l,r,c,q,sl,cc  | 状态     |
 | create_time | date         | sysdate |  是   |       l,r        | 创建时间 |
 
@@ -38,11 +38,11 @@ After: After(字段名) //在某个字段后面
 
 | 字段名      | 类型         | 默认值  | 为空  |       约束        | 描述     |
 | ----------- | ------------ | :-----: | :---: | :---------------: | :------- |
-| pn_id       | number(10)   |  2000   |  否   |   PK,SEQ,l,c,r    | 编号     |
+| pn_id       | number(10)   |  2000   |  否   |   PK,SEQ,l,r    | 编号     |
 | pn_name     | varchar2(64) |         |  否   |  DN,c,u,r,l,r,q   | 名称     |
 | category    | number(10)   |    0    |  否   |    u,l,r,c,sl     | 分类     |
-| score       | number(10)   |    0    |  否   |   DI,c,u,l,r,r    | 分数     |
-| status      | number(1)    |    0    |  否   | c,u,l,r,c,q,sl,cc | 状态     |
+| score       | number(10)   |    0    |  否   |   DI,c,u,l,r    | 分数     |
+| status      | number(1)    |    0    |  否   | u,l,r,c,q,sl,cc | 状态     |
 | create_time | date         | sysdate |  否   |        l,r        | 创建时间 |
 
 
@@ -51,7 +51,7 @@ After: After(字段名) //在某个字段后面
 
 | 字段名      | 类型         | 默认值  | 为空  |      约束       | 描述     |
 | ----------- | ------------ | :-----: | :---: | :-------------: | :------- |
-| gif_id      | number(10)   |   1000      |  否   |   SEQ,PK,l,r    | 编号     |
+| gif_id      | number(10)   |  1000   |  否   |   SEQ,PK,l,r    | 编号     |
 | gif_name    | varchar2(64) |         |  否   |  DN,c,u,r,l,q   | 礼品名称 |
 | score       | number(10)   |    0    |  否   |   DI,c,u,r,l    | 分数     |
 | status      | number(1)    |    0    |  否   | c,u,r,l,q,sl,cc | 状态     |
@@ -60,25 +60,26 @@ After: After(字段名) //在某个字段后面
 
 ###  4. 用户信息[sc_user_info]
 
-| 字段名      | 类型         | 默认值  | 为空  |      约束      | 描述     |
-| ----------- | ------------ | :-----: | :---: | :------------: | :------- |
-| uid         | number(10)   |   100   |  否   | SEQ,PK,DI,l,r  | 用户编号 |
-| name        | varchar2(64) |         |  否   | DN,c,u,r,l,r,q | 姓名     |
-| score       | number(10)   |    0    |  否   |      r,l       | 分数     |
-| status      | number(1)    |    0    |  否   |  c,u,r,l,q,sl  | 状态     |
-| create_time | date         | sysdate |  否   |      l,r       | 创建时间 |
+| 字段名      | 类型          | 默认值  | 为空  |      约束      | 描述     |
+| ----------- | ------------- | :-----: | :---: | :------------: | :------- |
+| uid         | number(10)    |   100   |  否   | SEQ,PK,DI,l,r  | 用户编号 |
+| name        | varchar2(64)  |         |  否   | DN,c,u,r,l,r,q | 姓名     |
+| url         | varchar2(128) |         |  否   |     c,u,l,r      | 头像     |
+| score       | number(10)    |    0    |  否   |      r,l       | 分数     |
+| status      | number(1)     |    0    |  否   |  c,u,r,l,q,sl  | 状态     |
+| create_time | date          | sysdate |  否   |      l,r       | 创建时间 |
 
 
 ###  5. 分数记录[sc_score_record]
 
-| 字段名      | 类型       | 默认值  | 为空  |         约束          | 描述     |
-| ----------- | ---------- | :-----: | :---: | :-------------------: | :------- |
-| rc_id       | number(10) |         |  否   |         PK,DI         | 编号     |
-| uid         | number(10) |         |  否   | DN,sl(sc_user_info),q | 用户     |
-| c_tp        | number(1)  |         |  是   |     l,u,c,r,q,sl      | 类型     |
-| score       | number(10) |         |  否   |        l,u,c,r        | 变动分数 |
-| remain      | number(20) |    0    |  是   |         r,u,c         | 剩余     |
-| create_time | date       | sysdate |  否   |          r,l          | 创建时间 |
+| 字段名      | 类型       | 默认值  | 为空  |          约束           | 描述     |
+| ----------- | ---------- | :-----: | :---: | :---------------------: | :------- |
+| rc_id       | number(10) |         |  否   |        PK,DI,SEQ        | 编号     |
+| uid         | number(10) |         |  否   | DN,sl(sc_user_info),q,c | 用户     |
+| c_tp        | number(1)  |         |  是   |     l,u,c,r,q,sl,c      | 类型     |
+| score       | number(10) |         |  否   |   l,u,c,r,c,sl(#c_tp)   | 变动分数 |
+| remain      | number(20) |    0    |  是   |            r            | 剩余     |
+| create_time | date       | sysdate |  否   |           r,l           | 创建时间 |
 
 ### 6. 字典配置[sc_dict_info]
 
@@ -88,5 +89,5 @@ After: After(字段名) //在某个字段后面
 | name    | varchar2(64) |        |  否   |   q,c,u,l,r,DN   | 名称   |
 | value   | varchar2(32) |        |  否   |     c,u,l,r      | 值     |
 | type    | varchar2(32) |        |  否   |    q,c,u,l,r     | 类型   |
-| status  | number(1)    |   0    |  否   |   q,c,u,l,r,cc   | 状态   |
+| status  | number(1)    |   0    |  否   | q,c,u,l,r,cc,sl  | 状态   |
 | sort_no | number(2)    |   0    |  否   |     c,u,l,r      | 排序值 |

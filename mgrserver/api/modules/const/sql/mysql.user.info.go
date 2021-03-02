@@ -5,12 +5,14 @@ insert into sc_user_info
 (
 	uid,
 	name,
+	url,
 	status
 )
 values
 (
 	@uid,
 	@name,
+	@url,
 	if(isnull(@status)||@status='',0,@status)
 )`
 
@@ -19,6 +21,7 @@ const GetUserInfoByUid = `
 select
 	t.uid,
 	t.name,
+	t.url,
 	t.score,
 	t.status,
 	t.create_time
@@ -39,6 +42,7 @@ const GetUserInfoList = `
 select
 	t.uid,
 	t.name,
+	t.url,
 	t.score,
 	t.status,
 	t.create_time 
@@ -54,6 +58,7 @@ const UpdateUserInfoByUid = `
 update sc_user_info 
 set
 	name =	@name,
+	url =	@url,
 	status =	if(isnull(@status)||@status='',0,@status)
 where
 	&uid`

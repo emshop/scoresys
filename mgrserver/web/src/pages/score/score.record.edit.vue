@@ -1,9 +1,9 @@
 <template>
-	<el-dialog title="编辑兑换记录" width="65%" @closed="closed" :visible.sync="dialogFormVisible">
+	<el-dialog title="编辑分数记录" width="65%" @closed="closed" :visible.sync="dialogFormVisible">
 		<el-form :model="editData"  :rules="rules" ref="editForm" label-width="110px">
       
 			<el-form-item label="类型:" prop="c_tp">
-				<el-select size="medium" style="width: 100%;"	v-model="editData.c_tp"	clearable filterable class="input-cos" placeholder="---请选择---">
+				<el-select size="medium" style="width: 100%;"	v-model="editData.c_tp" @change="setScore(editData.c_tp)"	clearable filterable class="input-cos" placeholder="---请选择---">
 					<el-option v-for="(item, index) in cTp" :key="index" :value="item.value" :label="item.name"></el-option>
 				</el-select>
 			</el-form-item>
@@ -11,12 +11,6 @@
       <el-form-item label="变动分数" prop="score">
 				<el-input size="medium" maxlength="10"
 				clearable v-model="editData.score" placeholder="请输入变动分数">
-				</el-input>
-      </el-form-item>
-      
-      <el-form-item label="剩余" prop="remain">
-				<el-input size="medium" maxlength="20"
-				clearable v-model="editData.remain" placeholder="请输入剩余">
 				</el-input>
       </el-form-item>
       

@@ -14,8 +14,10 @@
 				</el-form-item>
 			
 				<el-form-item>
-					<el-input clearable size="medium" v-model="queryData.status" placeholder="请输入状态">
-					</el-input>
+					<el-select size="medium" v-model="queryData.status" clearable filterable class="input-cos" placeholder="请选择状态">
+						<el-option value="" label="全部"></el-option>
+						<el-option v-for="(item, index) in status" :key="index" :value="item.value" :label="item.name"></el-option>
+					</el-select>
 				</el-form-item>
 			
 				<el-form-item>
@@ -62,9 +64,9 @@
 				
 				</el-table-column>
 				<el-table-column   prop="status" label="状态" align="center">
-				<template slot-scope="scope">
-					<span>{{scope.row.status | fltrNumberFormat(0)}}</span>
-				</template>
+					<template slot-scope="scope">
+						<span :class="scope.row.status|fltrTextColor">{{scope.row.status | fltrEnum("status")}}</span>
+					</template>
 				</el-table-column>
 				<el-table-column   prop="sort_no" label="排序值" align="center">
 				<template slot-scope="scope">
@@ -121,6 +123,7 @@ export default {
 			editData:{},                //编辑数据对象
 			addData:{},                 //添加数据对象 
       queryData:{},               //查询数据对象
+			status: this.$enum.get("status"),
 			dataList: {count: 0,items: []}, //表单数据对象,
 			maxHeight: document.body.clientHeight
 		}

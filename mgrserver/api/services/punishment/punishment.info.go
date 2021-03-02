@@ -123,7 +123,6 @@ func (u *PunishmentInfoHandler) PutHandle(ctx hydra.IContext) (r interface{}) {
 }
 
 var postPunishmentInfoCheckFields = map[string]interface{}{
-	field.FieldPnID:"required",
 	field.FieldPnName:"required",
 	field.FieldCategory:"required",
 	field.FieldScore:"required",

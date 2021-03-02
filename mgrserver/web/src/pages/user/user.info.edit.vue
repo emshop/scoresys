@@ -1,9 +1,15 @@
 <template>
-	<el-dialog title="编辑用户信息" width="25%" @closed="closed" :visible.sync="dialogFormVisible">
+	<el-dialog title="编辑用户信息" width="65%" @closed="closed" :visible.sync="dialogFormVisible">
 		<el-form :model="editData"  :rules="rules" ref="editForm" label-width="110px">
       <el-form-item label="姓名" prop="name">
 				<el-input size="medium" maxlength="64"
 				clearable v-model="editData.name" placeholder="请输入姓名">
+				</el-input>
+      </el-form-item>
+      
+      <el-form-item label="头像" prop="url">
+				<el-input size="medium" maxlength="128"
+				clearable v-model="editData.url" placeholder="请输入头像">
 				</el-input>
       </el-form-item>
       
@@ -32,6 +38,9 @@ export default {
 			rules: {                    //数据验证规则
 				name: [
 					{ required: true, message: "请输入姓名", trigger: "blur" }
+				],
+				url: [
+					{ required: true, message: "请输入头像", trigger: "blur" }
 				],
 				status: [
 					{ required: true, message: "请输入状态", trigger: "blur" }

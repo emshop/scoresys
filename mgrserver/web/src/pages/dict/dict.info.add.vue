@@ -20,11 +20,12 @@
 				</el-input>
       </el-form-item>
       
-      <el-form-item label="状态" prop="status">
-				<el-input size="medium" maxlength="1"
-				 clearable v-model="addData.status" placeholder="请输入状态">
-				</el-input>
-      </el-form-item>
+      
+			<el-form-item label="状态:" prop="status">
+				<el-select size="medium" style="width: 100%;"	v-model="addData.status"	clearable filterable class="input-cos" placeholder="---请选择---">
+					<el-option v-for="(item, index) in status" :key="index" :value="item.value" :label="item.name"></el-option>
+				</el-select>
+			</el-form-item>
       
       <el-form-item label="排序值" prop="sort_no">
 				<el-input size="medium" maxlength="2"
@@ -47,6 +48,7 @@ export default {
 		return {
 			addData: {},
 			dialogAddVisible: false,
+			status:this.$enum.get("status"),
 			rules: {                    //数据验证规则
 				name: [{ required: true, message: "请输入名称", trigger: "blur" }],
 				value: [{ required: true, message: "请输入值", trigger: "blur" }],

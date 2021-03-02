@@ -12,26 +12,6 @@ export default new Router({
       component: () => import('../pages/system/menus.vue'),
       children:[
 				{
-					path: 'punishment/info',
-					name: 'PunishmentInfo',
-					component: () => import('../pages/punishment/punishment.info.list.vue')
-				},
-				{
-					path: 'punishment/info/detail',
-					name: 'PunishmentInfoDetail',
-					component: () => import('../pages/punishment/punishment.info.detail.vue')
-				},
-				{
-					path: 'reward/info',
-					name: 'RewardInfo',
-					component: () => import('../pages/reward/reward.info.list.vue')
-				},
-				{
-					path: 'reward/info/detail',
-					name: 'RewardInfoDetail',
-					component: () => import('../pages/reward/reward.info.detail.vue')
-				},
-				{
 					path: 'score/record',
 					name: 'ScoreRecord',
 					component: () => import('../pages/score/score.record.list.vue')
@@ -70,6 +50,26 @@ export default new Router({
 					path: 'gif/info/detail',
 					name: 'GifInfoDetail',
 					component: () => import('../pages/gif/gif.info.detail.vue')
+				},
+				{
+					path: 'punishment/info',
+					name: 'PunishmentInfo',
+					component: () => import('../pages/punishment/punishment.info.list.vue')
+				},
+				{
+					path: 'punishment/info/detail',
+					name: 'PunishmentInfoDetail',
+					component: () => import('../pages/punishment/punishment.info.detail.vue')
+				},
+				{
+					path: 'reward/info',
+					name: 'RewardInfo',
+					component: () => import('../pages/reward/reward.info.list.vue')
+				},
+				{
+					path: 'reward/info/detail',
+					name: 'RewardInfoDetail',
+					component: () => import('../pages/reward/reward.info.detail.vue')
 				},
       ]
     }

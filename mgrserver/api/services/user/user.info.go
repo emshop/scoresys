@@ -124,6 +124,7 @@ func (u *UserInfoHandler) PutHandle(ctx hydra.IContext) (r interface{}) {
 
 var postUserInfoCheckFields = map[string]interface{}{
 	field.FieldName:"required",
+	field.FieldURL:"required",
 	field.FieldStatus:"required",
 	}
 
@@ -138,6 +139,7 @@ var queryUserInfoCheckFields = map[string]interface{}{
 
 var updateUserInfoCheckFields = map[string]interface{}{
 	field.FieldName:"required",
+	field.FieldURL:"required",
 	field.FieldStatus:"required",
 	}
 

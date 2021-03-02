@@ -55,5 +55,8 @@ const FieldType = "type"
 //FieldUid 字段用户的数据库名称
 const FieldUid = "uid"
 
+//FieldURL 字段头像的数据库名称
+const FieldURL = "url"
+
 //FieldValue 字段值的数据库名称
 const FieldValue = "value"

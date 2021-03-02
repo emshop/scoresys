@@ -14,13 +14,13 @@ import (
 //init 检查应用程序配置文件，并根据配置初始化服务
 func init() {
 	hydra.OnReady(func() {
-		hydra.S.Web("/score/record", score.NewScoreRecordHandler())
-		hydra.S.Web("/user/info", user.NewUserInfoHandler())
-		hydra.S.Web("/system/enums", system.NewSystemEnumsHandler())
 		hydra.S.Web("/dict/info", dict.NewDictInfoHandler())
 		hydra.S.Web("/gif/info", gif.NewGifInfoHandler())
 		hydra.S.Web("/punishment/info", punishment.NewPunishmentInfoHandler())
 		hydra.S.Web("/reward/info", reward.NewRewardInfoHandler())
+		hydra.S.Web("/score/record", score.NewScoreRecordHandler())
+		hydra.S.Web("/user/info", user.NewUserInfoHandler())
+		hydra.S.Web("/system/enums", system.NewSystemEnumsHandler())
 	})
 }
 

@@ -41,8 +41,8 @@ func (o *SystemEnumsHandler) QueryHandle(ctx hydra.IContext) interface{} {
 }
 
 var enumsMap = map[string]string{
-	"reward_info":     `select 'reward_info' type , t.rw_id value , t.rw_name name  from sc_reward_info t `,
-	"punishment_info": `select 'punishment_info' type , t.pn_name name , t.score value  from sc_punishment_info t `,
+	"reward_info":     `select 'reward_info' type ,t.rw_id id, t.score value , t.rw_name name  from sc_reward_info t `,
+	"punishment_info": `select 'punishment_info' type ,t.pn_id id, t.pn_name name , t.score value  from sc_punishment_info t `,
 	"gif_info":        `select 'gif_info' type , t.gif_name name , t.score value  from sc_gif_info t `,
 	"user_info":       `select 'user_info' type , t.uid value , t.name name   from sc_user_info t `,
 	"score_record":    `select 'score_record' type , t.rc_id value , t.uid name   from sc_score_record t `,

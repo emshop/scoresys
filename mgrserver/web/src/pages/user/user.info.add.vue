@@ -8,6 +8,12 @@
 				</el-input>
       </el-form-item>
       
+      <el-form-item label="头像" prop="url">
+				<el-input size="medium" maxlength="128"
+				 clearable v-model="addData.url" placeholder="请输入头像">
+				</el-input>
+      </el-form-item>
+      
       
 			<el-form-item label="状态:" prop="status">
 				<el-select size="medium" style="width: 100%;"	v-model="addData.status"	clearable filterable class="input-cos" placeholder="---请选择---">
@@ -33,6 +39,7 @@ export default {
 			status:this.$enum.get("status"),
 			rules: {                    //数据验证规则
 				name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+				url: [{ required: true, message: "请输入头像", trigger: "blur" }],
 				status: [{ required: true, message: "请输入状态", trigger: "blur" }],
 			},
 		}

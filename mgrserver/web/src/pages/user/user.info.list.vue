@@ -46,6 +46,15 @@
 						<span v-else>{{scope.row.name}}</span>
 					</template>
 				</el-table-column>
+				<el-table-column   prop="url" label="头像" align="center">
+					<template slot-scope="scope">
+						<el-tooltip class="item" v-if="scope.row.url && scope.row.url.length > 20" effect="dark" placement="top">
+							<div slot="content" style="width: 110px">{{scope.row.url}}</div>
+							<span>{{scope.row.url | fltrSubstr(20) }}</span>
+						</el-tooltip>
+						<span v-else>{{scope.row.url}}</span>
+					</template>
+				</el-table-column>
 				<el-table-column   prop="score" label="分数" align="center">
 				<template slot-scope="scope">
 					<span>{{scope.row.score | fltrNumberFormat(0)}}</span>

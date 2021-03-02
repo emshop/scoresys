@@ -11,7 +11,7 @@
 				</el-form-item>
 			
 				<el-form-item>
-					<el-select size="medium" v-model="queryData.c_tp" clearable filterable class="input-cos" placeholder="请选择类型">
+					<el-select size="medium" v-model="queryData.c_tp" @change="setScore(queryData.c_tp)" clearable filterable class="input-cos" placeholder="请选择类型">
 						<el-option value="" label="全部"></el-option>
 						<el-option v-for="(item, index) in cTp" :key="index" :value="item.value" :label="item.name"></el-option>
 					</el-select>
