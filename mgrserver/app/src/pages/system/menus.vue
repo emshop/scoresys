@@ -2,11 +2,10 @@
 <template>
 <div>
 <router-view/>
-
 <van-tabbar route >
    <van-tabbar-item replace to="/home/index" icon="home-o">首页</van-tabbar-item>
   <van-tabbar-item replace to="/score" icon="certificate">记一笔</van-tabbar-item>
-  <van-tabbar-item replace to="/home/record" icon="certificate">记录</van-tabbar-item>
+  <van-tabbar-item replace to="/home/record" icon="point-gift-o">兑换</van-tabbar-item>
 </van-tabbar>
 </div>
 </template>

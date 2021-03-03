@@ -36,14 +36,14 @@ After: After(字段名) //在某个字段后面
 
 ###  2. 惩罚信息[sc_punishment_info]
 
-| 字段名      | 类型         | 默认值  | 为空  |       约束        | 描述     |
-| ----------- | ------------ | :-----: | :---: | :---------------: | :------- |
+| 字段名      | 类型         | 默认值  | 为空  |      约束       | 描述     |
+| ----------- | ------------ | :-----: | :---: | :-------------: | :------- |
 | pn_id       | number(10)   |  2000   |  否   |   PK,SEQ,l,r    | 编号     |
-| pn_name     | varchar2(64) |         |  否   |  DN,c,u,r,l,r,q   | 名称     |
-| category    | number(10)   |    0    |  否   |    u,l,r,c,sl     | 分类     |
+| pn_name     | varchar2(64) |         |  否   | DN,c,u,r,l,r,q  | 名称     |
+| category    | number(10)   |    0    |  否   |   u,l,r,c,sl    | 分类     |
 | score       | number(10)   |    0    |  否   |   DI,c,u,l,r    | 分数     |
 | status      | number(1)    |    0    |  否   | u,l,r,c,q,sl,cc | 状态     |
-| create_time | date         | sysdate |  否   |        l,r        | 创建时间 |
+| create_time | date         | sysdate |  否   |       l,r       | 创建时间 |
 
 
 
@@ -64,7 +64,8 @@ After: After(字段名) //在某个字段后面
 | ----------- | ------------- | :-----: | :---: | :------------: | :------- |
 | uid         | number(10)    |   100   |  否   | SEQ,PK,DI,l,r  | 用户编号 |
 | name        | varchar2(64)  |         |  否   | DN,c,u,r,l,r,q | 姓名     |
-| url         | varchar2(128) |         |  否   |     c,u,l,r      | 头像     |
+| url         | varchar2(128) |         |  否   |    c,u,l,r     | 头像     |
+| birth_date  | date          |         |  否   |    c,u,l,r     | 出生日期     |
 | score       | number(10)    |    0    |  否   |      r,l       | 分数     |
 | status      | number(1)     |    0    |  否   |  c,u,r,l,q,sl  | 状态     |
 | create_time | date          | sysdate |  否   |      l,r       | 创建时间 |
