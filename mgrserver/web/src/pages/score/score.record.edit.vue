@@ -3,16 +3,17 @@
 		<el-form :model="editData"  :rules="rules" ref="editForm" label-width="110px">
       
 			<el-form-item label="类型:" prop="c_tp">
-				<el-select size="medium" style="width: 100%;"	v-model="editData.c_tp" @change="setScore(editData.c_tp)"	clearable filterable class="input-cos" placeholder="---请选择---">
+				<el-select size="medium" style="width: 100%;"	v-model="editData.c_tp" clearable filterable class="input-cos" placeholder="---请选择---" @change="setScore(editData.c_tp)"	>
 					<el-option v-for="(item, index) in cTp" :key="index" :value="item.value" :label="item.name"></el-option>
 				</el-select>
 			</el-form-item>
       
-      <el-form-item label="变动分数" prop="score">
-				<el-input size="medium" maxlength="10"
-				clearable v-model="editData.score" placeholder="请输入变动分数">
-				</el-input>
-      </el-form-item>
+      
+			<el-form-item label="变动分数:" prop="score">
+				<el-select size="medium" style="width: 100%;"	v-model="editData.score" clearable filterable class="input-cos" placeholder="---请选择---" @change="handleChooseTool()"	>
+					<el-option v-for="(item, index) in score" :key="index" :value="item.value" :label="item.name"></el-option>
+				</el-select>
+			</el-form-item>
       
     </el-form>
 		<div slot="footer" class="dialog-footer">
@@ -29,6 +30,7 @@ export default {
 			dialogFormVisible: false,    //编辑表单显示隐藏
 			editData: {},                //编辑数据对象
       cTp: this.$enum.get("c_tp"),
+      score: [],
 			rules: {                    //数据验证规则
 				score: [
 					{ required: true, message: "请输入变动分数", trigger: "blur" }
@@ -49,9 +51,16 @@ export default {
 		closed() {
 			this.refresh()
 		},
+		handleChooseTool() {
+      this.$forceUpdate()
+    },
 		show() {
 			this.editData = this.$http.xget("/score/record", { rc_id: this.editData.rc_id })
 			this.dialogFormVisible = true;
+		},
+		setScore(pid){
+			this.editData.score = ""
+			this.score=this.$enum.get("score",pid)
 		},
 		edit() {
 			this.$http.put("/score/record", this.editData, {}, true, true)

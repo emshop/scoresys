@@ -38,21 +38,31 @@
                     <div>{{ info.url | fltrEmpty }}</div>
                   </el-col>                 
                   <el-col :span="6">
-                    <div class="pull-right" style="margin-right: 10px">分数:</div>
+                    <div class="pull-right" style="margin-right: 10px">出生日期:</div>
                   </el-col>
                   <el-col :span="6">
-                    <div>{{ info.score |  fltrNumberFormat(0)}}</div>
+                    <div>{{ info.birthday | fltrDate("yyyy-MM-dd") }}</div>
                   </el-col>
                 </td>
               </tr>
               <tr>
                 <td>                 
                   <el-col :span="6">
+                    <div class="pull-right" style="margin-right: 10px">分数:</div>
+                  </el-col>
+                  <el-col :span="6">
+                    <div>{{ info.score |  fltrNumberFormat(0)}}</div>
+                  </el-col>                 
+                  <el-col :span="6">
                     <div class="pull-right" style="margin-right: 10px">状态:</div>
                   </el-col>
                   <el-col :span="6">
                     <div >{{ info.status | fltrEnum("status") }}</div>
-                  </el-col>                 
+                  </el-col>
+                </td>
+              </tr>
+              <tr>
+                <td>                 
                   <el-col :span="6">
                     <div class="pull-right" style="margin-right: 10px">创建时间:</div>
                   </el-col>

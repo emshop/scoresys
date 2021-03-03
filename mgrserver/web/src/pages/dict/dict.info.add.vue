@@ -2,19 +2,19 @@
   <!-- Add Form -->
   <el-dialog title="添加字典配置" width="25%" :visible.sync="dialogAddVisible">
     <el-form :model="addData"  :rules="rules" ref="addForm" label-width="110px">
-      <el-form-item label="名称" prop="name">
+      <el-form-item label="名称:" prop="name">
 				<el-input size="medium" maxlength="64"
 				 clearable v-model="addData.name" placeholder="请输入名称">
 				</el-input>
       </el-form-item>
       
-      <el-form-item label="值" prop="value">
+      <el-form-item label="值:" prop="value">
 				<el-input size="medium" maxlength="32"
 				 clearable v-model="addData.value" placeholder="请输入值">
 				</el-input>
       </el-form-item>
       
-      <el-form-item label="类型" prop="type">
+      <el-form-item label="类型:" prop="type">
 				<el-input size="medium" maxlength="32"
 				 clearable v-model="addData.type" placeholder="请输入类型">
 				</el-input>
@@ -27,7 +27,7 @@
 				</el-select>
 			</el-form-item>
       
-      <el-form-item label="排序值" prop="sort_no">
+      <el-form-item label="排序值:" prop="sort_no">
 				<el-input size="medium" maxlength="2"
 				 clearable v-model="addData.sort_no" placeholder="请输入排序值">
 				</el-input>

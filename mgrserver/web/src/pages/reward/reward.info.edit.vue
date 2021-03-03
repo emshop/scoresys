@@ -1,7 +1,7 @@
 <template>
 	<el-dialog title="编辑奖励信息" width="65%" @closed="closed" :visible.sync="dialogFormVisible">
 		<el-form :model="editData"  :rules="rules" ref="editForm" label-width="110px">
-      <el-form-item label="名称" prop="rw_name">
+      <el-form-item label="名称:" prop="rw_name">
 				<el-input size="medium" maxlength="64"
 				clearable v-model="editData.rw_name" placeholder="请输入名称">
 				</el-input>
@@ -9,12 +9,12 @@
       
       
 			<el-form-item label="分类:" prop="category">
-				<el-select size="medium" style="width: 100%;"	v-model="editData.category"	clearable filterable class="input-cos" placeholder="---请选择---">
+				<el-select size="medium" style="width: 100%;"	v-model="editData.category" clearable filterable class="input-cos" placeholder="---请选择---"	>
 					<el-option v-for="(item, index) in category" :key="index" :value="item.value" :label="item.name"></el-option>
 				</el-select>
 			</el-form-item>
       
-      <el-form-item label="分数" prop="score">
+      <el-form-item label="分数:" prop="score">
 				<el-input size="medium" maxlength="10"
 				clearable v-model="editData.score" placeholder="请输入分数">
 				</el-input>
@@ -22,7 +22,7 @@
       
       
 			<el-form-item label="状态:" prop="status">
-				<el-select size="medium" style="width: 100%;"	v-model="editData.status"	clearable filterable class="input-cos" placeholder="---请选择---">
+				<el-select size="medium" style="width: 100%;"	v-model="editData.status" clearable filterable class="input-cos" placeholder="---请选择---"	>
 					<el-option v-for="(item, index) in status" :key="index" :value="item.value" :label="item.name"></el-option>
 				</el-select>
 			</el-form-item>

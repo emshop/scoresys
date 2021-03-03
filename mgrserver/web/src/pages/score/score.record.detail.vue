@@ -17,7 +17,7 @@
                     <div class="pull-right" style="margin-right: 10px">变动分数:</div>
                   </el-col>
                   <el-col :span="6">
-                    <div>{{ info.score |  fltrNumberFormat(0)}}</div>
+                    <div >{{ info.score | fltrEnum("score") }}</div>
                   </el-col>
                 </td>
               </tr>

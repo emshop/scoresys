@@ -1,4 +1,5 @@
 package sql
+
 //InsertScoreRecord 添加分数记录
 const InsertScoreRecord = `
 insert into sc_score_record
@@ -48,6 +49,7 @@ where
 order by t.rc_id desc
 limit @ps offset @offset
 `
+
 //UpdateScoreRecordByRcID 更新分数记录
 const UpdateScoreRecordByRcID = `
 update sc_score_record 
@@ -56,4 +58,3 @@ set
 	score =	if(isnull(@score)||@score='',0,@score)
 where
 	&rc_id`
-

@@ -22,13 +22,23 @@ export default new Router({
         name: 'index',
         component: () => import('../pages/home/index.vue'),
         meta: { title: "首页" }
-        }
+        }, {
+          path: 'score',
+          name: 'score',
+          component: () => import('../pages/home/score.vue'),
+          meta: { title: "首页" }
+          }, {
+            path: 'exchange',
+            name: 'exchange',
+            component: () => import('../pages/home/exchange.vue'),
+            meta: { title: "首页" }
+            }
       ]
     },
     {
-      path: '/score',
-      name: '/score',
-      component: () => import('../pages/score/index.vue'),
+      path: '/score/add',
+      name: '/score/add',
+      component: () => import('../pages/score/add.vue'),
       meta: { title: "积分" }
       },
   ]

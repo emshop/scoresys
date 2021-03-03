@@ -1,32 +1,26 @@
 [
   {
-    "name": "分数记录",
-    "icon": "fa fa-user-circle text-primary",
-    "path": "/score/record"
-  },
-  {
-    "name": "用户信息",
-    "icon": "fa fa-user-circle text-primary",
-    "path": "/user/info"
-  },
-  {
-    "name": "字典配置",
-    "icon": "fa fa-user-circle text-primary",
-    "path": "/dict/info"
-  },
-  {
-    "name": "礼品信息",
-    "icon": "fa fa-user-circle text-primary",
-    "path": "/gif/info"
-  },
-  {
     "name": "惩罚信息",
-    "icon": "fa fa-user-circle text-primary",
     "path": "/punishment/info"
   },
   {
     "name": "奖励信息",
-    "icon": "fa fa-user-circle text-primary",
     "path": "/reward/info"
+  },
+  {
+    "name": "分数记录",
+    "path": "/score/record"
+  },
+  {
+    "name": "用户信息",
+    "path": "/user/info"
+  },
+  {
+    "name": "字典配置",
+    "path": "/dict/info"
+  },
+  {
+    "name": "礼品信息",
+    "path": "/gif/info"
   }
 ]

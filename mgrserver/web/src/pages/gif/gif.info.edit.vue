@@ -1,13 +1,13 @@
 <template>
 	<el-dialog title="编辑礼品信息" width="25%" @closed="closed" :visible.sync="dialogFormVisible">
 		<el-form :model="editData"  :rules="rules" ref="editForm" label-width="110px">
-      <el-form-item label="礼品名称" prop="gif_name">
+      <el-form-item label="礼品名称:" prop="gif_name">
 				<el-input size="medium" maxlength="64"
 				clearable v-model="editData.gif_name" placeholder="请输入礼品名称">
 				</el-input>
       </el-form-item>
       
-      <el-form-item label="分数" prop="score">
+      <el-form-item label="分数:" prop="score">
 				<el-input size="medium" maxlength="10"
 				clearable v-model="editData.score" placeholder="请输入分数">
 				</el-input>
@@ -15,7 +15,7 @@
       
       
 			<el-form-item label="状态:" prop="status">
-				<el-select size="medium" style="width: 100%;"	v-model="editData.status"	clearable filterable class="input-cos" placeholder="---请选择---">
+				<el-select size="medium" style="width: 100%;"	v-model="editData.status" clearable filterable class="input-cos" placeholder="---请选择---"	>
 					<el-option v-for="(item, index) in status" :key="index" :value="item.value" :label="item.name"></el-option>
 				</el-select>
 			</el-form-item>

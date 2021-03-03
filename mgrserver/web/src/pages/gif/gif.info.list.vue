@@ -9,7 +9,7 @@
 				</el-form-item>
 			
 				<el-form-item>
-					<el-select size="medium" v-model="queryData.status" clearable filterable class="input-cos" placeholder="请选择状态">
+					<el-select size="medium" v-model="queryData.status"  clearable filterable class="input-cos" placeholder="请选择状态">
 						<el-option value="" label="全部"></el-option>
 						<el-option v-for="(item, index) in status" :key="index" :value="item.value" :label="item.name"></el-option>
 					</el-select>
@@ -132,7 +132,7 @@ export default {
       this.queryData.pi = this.paging.pi
 			this.queryData.ps = this.paging.ps
       let res = this.$http.xpost("/gif/info/query",this.$utility.delEmptyProperty(this.queryData))
-			this.dataList.items = res.items
+			this.dataList.items = res.items || []
 			this.dataList.count = res.count
     },
     /**改变页容量*/

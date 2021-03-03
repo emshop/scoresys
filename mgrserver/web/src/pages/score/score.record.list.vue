@@ -4,14 +4,14 @@
 		<div class="panel-body" id="panel-body">
 			<el-form ref="form" :inline="true" class="form-inline pull-left">
 				<el-form-item>
-					<el-select size="medium" v-model="queryData.uid" clearable filterable class="input-cos" placeholder="请选择用户">
+					<el-select size="medium" v-model="queryData.uid"  clearable filterable class="input-cos" placeholder="请选择用户">
 						<el-option value="" label="全部"></el-option>
 						<el-option v-for="(item, index) in uid" :key="index" :value="item.value" :label="item.name"></el-option>
 					</el-select>
 				</el-form-item>
 			
 				<el-form-item>
-					<el-select size="medium" v-model="queryData.c_tp" @change="setScore(queryData.c_tp)" clearable filterable class="input-cos" placeholder="请选择类型">
+					<el-select size="medium" v-model="queryData.c_tp"  clearable filterable class="input-cos" placeholder="请选择类型" @change="setScore(queryData.c_tp)">
 						<el-option value="" label="全部"></el-option>
 						<el-option v-for="(item, index) in cTp" :key="index" :value="item.value" :label="item.name"></el-option>
 					</el-select>
@@ -39,9 +39,9 @@
 					</template>
 				</el-table-column>
 				<el-table-column   prop="score" label="变动分数" align="center">
-				<template slot-scope="scope">
-					<span>{{scope.row.score | fltrNumberFormat(0)}}</span>
-				</template>
+					<template slot-scope="scope">
+						<span >{{scope.row.score | fltrEnum("score")}}</span>
+					</template>
 				</el-table-column>
 				<el-table-column   prop="create_time" label="创建时间" align="center">
 				<template slot-scope="scope">
@@ -120,7 +120,7 @@ export default {
       this.queryData.pi = this.paging.pi
 			this.queryData.ps = this.paging.ps
       let res = this.$http.xpost("/score/record/query",this.$utility.delEmptyProperty(this.queryData))
-			this.dataList.items = res.items
+			this.dataList.items = res.items || []
 			this.dataList.count = res.count
     },
     /**改变页容量*/

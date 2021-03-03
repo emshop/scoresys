@@ -1,23 +1,33 @@
+
 PK:主键
-SEQ:SEQ[(起始值,[大小])]，mysql自增，oracle序列
-UNQ:UNQ[(名称[,位置])],唯一约束
-IDX:索引,IDX[(名称[,位置])]
+SEQ:SEQ，mysql自增，oracle序列
 C: 创建数据时的字段
 R: 单条数据读取时的字段 
 U: 修改数据时需要的字段
-D: 删除，仅在主键字段使用
+D: 删除，默认为更新字段状态值为1，D[(更新状态值)]
 Q: 查询条件的字段
 L：(前端页面)列表里列出的字段
 OB：查询时的order by字段；默认降序； OB[(顺序)]，越小越先排序
 DI: 字典编号，数据表作为字典数据时的id字段
 DN: 字典名称，数据表作为字典数据时的name字段
-IN:        "input"       //表单输入框
-SL: "select"      //表单下拉框,默认使用dds字典表枚举,指定表名的SL[(字典数据表)]
-CB: "checkbox"    //表单复选框,默认使用dds字典表枚举,指定表名的CB[(字典数据表)]
-RB: "radio"       //表单单选框,默认使用dds字典表枚举,指定表名的RB[(字典数据表)]
+SL: "select"      //表单下拉框,默认使用dds字典表枚举,指定表名的SL[(字典表名)]
+CB: "checkbox"    //表单复选框,默认使用dds字典表枚举,指定表名的CB[(字典表名)]
+RD: "radio"       //表单单选框,默认使用dds字典表枚举,指定表名的RB[(字典表名)]
 TA: "textarea"    //表单文本域
-DT: "date-picker" //表单日期选择器
-After: After(字段名) //在某个字段后面
+CC: "color-class"  //状态颜色过滤器
+DATE: "date-picker" //表单日期选择器
+DTIME: "datetime-picker" //表单日期时间选择器,
+FIXED: 列表表单固定列
+SORT: 列表表单排序列
+列表自定义索引， 约定给当前表添加一行，字段名为_el_table_index,约束为索引大小
+
+//C,R,U,Q,L子约束
+f:前端过滤器，L(f:过滤器参数)
+e:枚举参数
+
+//枚举级联  #字段名，组件约束和子约束都可以使用
+
+//排除表 ^表名
 
 
 ## 一、基础信息表
@@ -65,7 +75,7 @@ After: After(字段名) //在某个字段后面
 | uid         | number(10)    |   100   |  否   | SEQ,PK,DI,l,r  | 用户编号 |
 | name        | varchar2(64)  |         |  否   | DN,c,u,r,l,r,q | 姓名     |
 | url         | varchar2(128) |         |  否   |    c,u,l,r     | 头像     |
-| birth_date  | date          |         |  否   |    c,u,l,r     | 出生日期     |
+| birthday    | date          |         |  否   |  DATE,c,u,l,r  | 出生日期 |
 | score       | number(10)    |    0    |  否   |      r,l       | 分数     |
 | status      | number(1)     |    0    |  否   |  c,u,r,l,q,sl  | 状态     |
 | create_time | date          | sysdate |  否   |      l,r       | 创建时间 |

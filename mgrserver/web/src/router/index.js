@@ -3,6 +3,12 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 Vue.use(Router);
+
+const VueRouterPush = Router.prototype.push
+Router.prototype.push = function push (to) {
+  return VueRouterPush.call(this, to).catch(err => err)
+}
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -11,6 +17,26 @@ export default new Router({
       name: 'menus',
       component: () => import('../pages/system/menus.vue'),
       children:[
+				{
+					path: 'punishment/info',
+					name: 'PunishmentInfo',
+					component: () => import('../pages/punishment/punishment.info.list.vue')
+				},
+				{
+					path: 'punishment/info/detail',
+					name: 'PunishmentInfoDetail',
+					component: () => import('../pages/punishment/punishment.info.detail.vue')
+				},
+				{
+					path: 'reward/info',
+					name: 'RewardInfo',
+					component: () => import('../pages/reward/reward.info.list.vue')
+				},
+				{
+					path: 'reward/info/detail',
+					name: 'RewardInfoDetail',
+					component: () => import('../pages/reward/reward.info.detail.vue')
+				},
 				{
 					path: 'score/record',
 					name: 'ScoreRecord',
@@ -50,26 +76,6 @@ export default new Router({
 					path: 'gif/info/detail',
 					name: 'GifInfoDetail',
 					component: () => import('../pages/gif/gif.info.detail.vue')
-				},
-				{
-					path: 'punishment/info',
-					name: 'PunishmentInfo',
-					component: () => import('../pages/punishment/punishment.info.list.vue')
-				},
-				{
-					path: 'punishment/info/detail',
-					name: 'PunishmentInfoDetail',
-					component: () => import('../pages/punishment/punishment.info.detail.vue')
-				},
-				{
-					path: 'reward/info',
-					name: 'RewardInfo',
-					component: () => import('../pages/reward/reward.info.list.vue')
-				},
-				{
-					path: 'reward/info/detail',
-					name: 'RewardInfoDetail',
-					component: () => import('../pages/reward/reward.info.detail.vue')
 				},
       ]
     }

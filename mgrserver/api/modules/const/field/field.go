@@ -1,6 +1,9 @@
 package field
 
 
+//FieldBirthday 字段出生日期的数据库名称
+const FieldBirthday = "birthday"
+
 //FieldCTp 字段类型的数据库名称
 const FieldCTp = "c_tp"
 

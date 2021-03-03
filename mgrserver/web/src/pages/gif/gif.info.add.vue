@@ -2,13 +2,13 @@
   <!-- Add Form -->
   <el-dialog title="添加礼品信息" width="25%" :visible.sync="dialogAddVisible">
     <el-form :model="addData"  :rules="rules" ref="addForm" label-width="110px">
-      <el-form-item label="礼品名称" prop="gif_name">
+      <el-form-item label="礼品名称:" prop="gif_name">
 				<el-input size="medium" maxlength="64"
 				 clearable v-model="addData.gif_name" placeholder="请输入礼品名称">
 				</el-input>
       </el-form-item>
       
-      <el-form-item label="分数" prop="score">
+      <el-form-item label="分数:" prop="score">
 				<el-input size="medium" maxlength="10"
 				 clearable v-model="addData.score" placeholder="请输入分数">
 				</el-input>

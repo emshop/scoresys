@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/lib4go/errs"
-	"github.com/micro-plat/lib4go/types"
 	"github.com/emshop/scoresys/mgrserver/api/modules/const/sql"
 	"github.com/emshop/scoresys/mgrserver/api/modules/const/field"
+	"github.com/micro-plat/lib4go/types"
 	"github.com/emshop/scoresys/mgrserver/api/modules/db"
 )
 
@@ -125,6 +125,7 @@ func (u *UserInfoHandler) PutHandle(ctx hydra.IContext) (r interface{}) {
 var postUserInfoCheckFields = map[string]interface{}{
 	field.FieldName:"required",
 	field.FieldURL:"required",
+	field.FieldBirthday:"required",
 	field.FieldStatus:"required",
 	}
 
@@ -140,6 +141,7 @@ var queryUserInfoCheckFields = map[string]interface{}{
 var updateUserInfoCheckFields = map[string]interface{}{
 	field.FieldName:"required",
 	field.FieldURL:"required",
+	field.FieldBirthday:"required",
 	field.FieldStatus:"required",
 	}
 

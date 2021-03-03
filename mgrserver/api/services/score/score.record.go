@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"github.com/micro-plat/hydra"
 	"github.com/micro-plat/lib4go/errs"
-	"github.com/micro-plat/lib4go/types"
 	"github.com/emshop/scoresys/mgrserver/api/modules/const/sql"
 	"github.com/emshop/scoresys/mgrserver/api/modules/const/field"
+	"github.com/micro-plat/lib4go/types"
 	
 )
 

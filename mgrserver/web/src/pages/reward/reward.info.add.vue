@@ -2,7 +2,7 @@
   <!-- Add Form -->
   <el-dialog title="添加奖励信息" width="25%" :visible.sync="dialogAddVisible">
     <el-form :model="addData"  :rules="rules" ref="addForm" label-width="110px">
-      <el-form-item label="名称" prop="rw_name">
+      <el-form-item label="名称:" prop="rw_name">
 				<el-input size="medium" maxlength="64"
 				 clearable v-model="addData.rw_name" placeholder="请输入名称">
 				</el-input>
@@ -15,7 +15,7 @@
 				</el-select>
 			</el-form-item>
       
-      <el-form-item label="分数" prop="score">
+      <el-form-item label="分数:" prop="score">
 				<el-input size="medium" maxlength="10"
 				 clearable v-model="addData.score" placeholder="请输入分数">
 				</el-input>

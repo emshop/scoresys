@@ -11,16 +11,17 @@
       
       
 			<el-form-item label="类型:" prop="c_tp">
-				<el-select size="medium" style="width: 100%;"	v-model="addData.c_tp" @change="setScore(addData.c_tp)"	clearable filterable class="input-cos" placeholder="---请选择---">
+				<el-select size="medium" style="width: 100%;"	v-model="addData.c_tp"	clearable filterable class="input-cos" placeholder="---请选择---" @change="setScore(addData.c_tp)">
 					<el-option v-for="(item, index) in cTp" :key="index" :value="item.value" :label="item.name"></el-option>
 				</el-select>
 			</el-form-item>
       
-      <el-form-item label="变动分数" prop="score">
-				<el-input size="medium" maxlength="10"
-				 clearable v-model="addData.score" placeholder="请输入变动分数">
-				</el-input>
-      </el-form-item>
+      
+			<el-form-item label="变动分数:" prop="score">
+				<el-select size="medium" style="width: 100%;"	v-model="addData.score"	clearable filterable class="input-cos" placeholder="---请选择---" @change="handleChooseTool()">
+					<el-option v-for="(item, index) in score" :key="index" :value="item.value" :label="item.name"></el-option>
+				</el-select>
+			</el-form-item>
       
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -39,6 +40,7 @@ export default {
 			dialogAddVisible: false,
 			uid:this.$enum.get("user_info"),
 			cTp:this.$enum.get("c_tp"),
+			score: [],
 			rules: {                    //数据验证规则
 				uid: [{ required: true, message: "请输入用户", trigger: "blur" }],
 				score: [{ required: true, message: "请输入变动分数", trigger: "blur" }],
@@ -64,6 +66,13 @@ export default {
 		},
 		show(){
 			this.dialogAddVisible = true;
+		},
+		handleChooseTool() {
+      this.$forceUpdate()
+    },
+		setScore(pid){
+			this.addData.score = ""
+			this.score=this.$enum.get("score",pid)
 		},
 		add(formName) {
 			this.$refs[formName].validate((valid) => {

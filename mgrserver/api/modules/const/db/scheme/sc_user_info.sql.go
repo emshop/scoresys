@@ -7,6 +7,7 @@ const sc_user_info=`
 		uid int  not null auto_increment comment '用户编号' ,
 		name varchar(64)  not null  comment '姓名' ,
 		url varchar(128)  not null  comment '头像' ,
+		birthday datetime  not null  comment '出生日期' ,
 		score int default 0 not null  comment '分数' ,
 		status tinyint default 0 not null  comment '状态' ,
 		create_time datetime default current_timestamp not null  comment '创建时间' 

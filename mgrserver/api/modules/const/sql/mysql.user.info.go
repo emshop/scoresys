@@ -6,6 +6,7 @@ insert into sc_user_info
 	uid,
 	name,
 	url,
+	birthday,
 	status
 )
 values
@@ -13,6 +14,7 @@ values
 	@uid,
 	@name,
 	@url,
+	@birthday,
 	if(isnull(@status)||@status='',0,@status)
 )`
 
@@ -22,6 +24,7 @@ select
 	t.uid,
 	t.name,
 	t.url,
+	t.birthday,
 	t.score,
 	t.status,
 	t.create_time
@@ -43,6 +46,7 @@ select
 	t.uid,
 	t.name,
 	t.url,
+	t.birthday,
 	t.score,
 	t.status,
 	t.create_time 
@@ -59,6 +63,7 @@ update sc_user_info
 set
 	name =	@name,
 	url =	@url,
+	birthday =	@birthday,
 	status =	if(isnull(@status)||@status='',0,@status)
 where
 	&uid`
