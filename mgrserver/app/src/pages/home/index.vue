@@ -1,45 +1,66 @@
 
 <template>
   <div>
-    <van-nav-bar title="宝宝积分">
+    <van-nav-bar title="宝宝积分" class="bg-danger">
       <template #right>
         <van-icon name="ellipsis" size="18" />
       </template>
     </van-nav-bar>
 
-    <van-cell-group>
+    <van-cell-group title="我的宝宝">
       <van-cell
         is-link
         clickable
         center
-        url="/score/add"
+        :url="'/score/add/' + item.uid"
         v-for="item in dataList.items"
         v-bind:key="item.uid"
       >
         <!-- 使用 title 插槽来自定义标题 -->
         <template>
           <van-row type="flex" align="center">
-            <van-col span="4" align="center">
+            <van-col span="5" align="center">
               <van-image
                 :src="item.url"
                 round
                 fit="cover"
-                width="4rem"
-                height="4rem"
+                width="4.5rem"
+                height="4.5rem"
               >
               </van-image>
             </van-col>
             <van-col span="3"> </van-col>
             <van-col span="12">
-              <div class="h5">{{ item.name }}</div>
+              <div class="h6">{{ item.name }}</div>
               <div class="text-muted">{{ getGrowAge(item.birthday) }}</div>
               <div>
-                总分:<span class="text-success h4"> {{ item.score }}</span> 分
+                总分:<span class="text-danger h6"> {{ item.score }}</span> 分
               </div>
             </van-col>
           </van-row>
         </template>
       </van-cell>
+    </van-cell-group>
+
+    <van-cell-group title="最近记录">
+      <van-collapse
+        v-for="r in records"
+        v-bind:key="r.id"
+        v-model="r.id"
+        accordion
+      >
+        <van-collapse-item :title="r.group" v-name="r.id" toggle="false">
+          <van-cell
+            center
+            v-for="rcd in r.items"
+            v-bind:key="rcd.id"
+            :value-class="rcd.type == 1 ? 'text-danger' : 'text-success'"
+            :title="rcd.score > 0 ? '+' + rcd.score + '分' : rcd.score + '分'"
+            :value="rcd.type == 1 ? '奖励' : '兑换'"
+            :label="rcd.label"
+          />
+        </van-collapse-item>
+      </van-collapse>
     </van-cell-group>
   </div>
 </template>
@@ -47,8 +68,19 @@
 export default {
   data() {
     return {
+      activeNames: "1",
       paging: { ps: 10, pi: 1 },
       dataList: { items: [] },
+      records: [
+        {
+          group: "2020-03-06",
+          id: "1",
+          items: [
+            { id: 1, score: 5, type: 1, label: "超级乖宝宝" },
+            { id: 1, score: -10, type: 3, label: "游戏币" },
+          ],
+        },
+      ],
     };
   },
   created() {},
@@ -57,9 +89,10 @@ export default {
   },
   methods: {
     query() {
-      let res = this.$http.xpost("/user/info/query", this.paging);
-      this.dataList.items = res.items;
-      this.dataList.count = res.count;
+      this.$http.post("/user/info/query", this.paging).then((res) => {
+        this.dataList.items = res.items;
+        this.dataList.count = res.count;
+      });
     },
     getGrowAge(birthday) {
       var now = new Date();
@@ -139,3 +172,17 @@ export default {
   },
 };
 </script>
+
+<style lang="css" scoped>
+/deep/ .van-ellipsis {
+  color: #fff;
+}
+
+/deep/ .van-nav-bar .van-icon {
+  color: #fff;
+}
+
+/deep/ .van-nav-bar__title {
+  color: #fff;
+}
+</style>

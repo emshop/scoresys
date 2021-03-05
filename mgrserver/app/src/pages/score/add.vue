@@ -1,8 +1,9 @@
 
 <template>
   <div>
+    <van-skeleton title avatar :row="3" :loading="loading">
     <van-nav-bar title="记录一笔" left-arrow @click-left="onClickLeft" />
-    <van-cell-group title="请选择">
+    <van-cell-group title="奖罚类型">
       <van-cell>
         <van-tree-select
           :items="items"
@@ -60,12 +61,14 @@
         />
       </van-form>
     </van-cell-group>
+    </van-skeleton>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      loading:true,
       reward_score: 0,
       pub_score: 0,
       showPicker: false,
@@ -90,13 +93,24 @@ export default {
   },
   methods: {
     getUsers() {
-      let res = this.$http.xpost("/user/info/query", this.paging);
-      let users = [];
-      res.items.forEach(function (item) {
-        users.push({ text: item.name, id: item.uid });
-      });
-      this.users = users;
-      this.user = users[0];
+      let that = this     
+      this.$http.post("/user/info/query", this.paging).then(res=>{
+        let users = [];
+        res.items.forEach(function (item) {
+          users.push({ text: item.name, id: item.uid });
+        });
+        that.users = users;
+        that.user = users[0];
+        if (that.$route.params.id){
+          that.users.forEach(function(u){
+            if (u.id==that.$route.params.id){
+                that.user = u
+            }
+          })
+        }
+        that.loading=false
+      })
+     
     },
     onClickLeft() {
       this.$router.push("/home/index");
@@ -105,7 +119,7 @@ export default {
       let rewardItem = this.rewardItem;
       let reward = this.$enum.get("reward_info") || [];
       reward.forEach(function (item) {
-        rewardItem.push({ text: item.name, id: item.id, value: item.value });
+        rewardItem.push({ text:item.name+"("+  item.value +"分)", id: item.id, value: item.value });
       });
 
       let punItem = this.punItem;

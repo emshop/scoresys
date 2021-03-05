@@ -1,7 +1,6 @@
 package api
 
 import (
-	"github.com/micro-plat/hydra"
 	"github.com/emshop/scoresys/mgrserver/api/services/dict"
 	"github.com/emshop/scoresys/mgrserver/api/services/gif"
 	"github.com/emshop/scoresys/mgrserver/api/services/punishment"
@@ -9,6 +8,7 @@ import (
 	"github.com/emshop/scoresys/mgrserver/api/services/score"
 	"github.com/emshop/scoresys/mgrserver/api/services/system"
 	"github.com/emshop/scoresys/mgrserver/api/services/user"
+	"github.com/micro-plat/hydra"
 )
 
 //init 检查应用程序配置文件，并根据配置初始化服务
@@ -23,4 +23,3 @@ func init() {
 		hydra.S.Web("/user/info", user.NewUserInfoHandler())
 	})
 }
-

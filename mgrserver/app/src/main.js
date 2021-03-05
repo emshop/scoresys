@@ -18,6 +18,8 @@ Vue.use(Vant)
 import utility from './utility'
 Vue.use(utility,false);
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => { 

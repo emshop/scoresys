@@ -8,7 +8,7 @@ import (
 var App = hydra.NewApp(
 	hydra.WithPlatName("emshop", "平台中文名"),
 	hydra.WithSystemName("scoresys", "积分管理"),
-	hydra.WithServerTypes(http.Web),
+	hydra.WithServerTypes(http.Web, http.API),
 )
 
 func main() {
