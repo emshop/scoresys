@@ -2,65 +2,77 @@
 <template>
   <div>
     <van-skeleton title avatar :row="3" :loading="loading">
-    <van-nav-bar title="记录一笔" left-arrow @click-left="onClickLeft" />
-    <van-cell-group title="奖罚类型">
-      <van-cell>
-        <van-tree-select
-          :items="items"
-          :active-id.sync="activeIds"
-          :main-active-index.sync="activeIndex"
-          @click-item="onSelectChanged"
-        />
-      </van-cell>
-    </van-cell-group>
+      <van-nav-bar
+        title="记录一笔"
+        class="bg-danger"
+        style="color: #fff"
+        left-arrow
+        @click-left="onClickLeft"
+      />
+      <van-cell-group title="奖罚类型">
+        <van-cell>
+          <van-tree-select
+            :items="items"
+            :active-id.sync="activeIds"
+            :main-active-index.sync="activeIndex"
+            @click-item="onSelectChanged"
+          />
+        </van-cell>
+      </van-cell-group>
 
-    <van-cell-group title="分数信息">
-      <van-form>
-        <van-field
-          readonly
-          clickable
-          name="姓名"
-          label-align="left"
-          input-align="left"
-          :value="user.text"
-          label="姓名"
-          placeholder="点击选择用户"
-          @click="showPicker = true"
-        />
-        <van-popup v-model="showPicker" position="bottom">
-          <van-picker show-toolbar @change="onChange" :columns="users"   @cancel="showPicker=false" @confirm="showPicker=false" />
-        </van-popup>
+      <van-cell-group title="分数信息">
+        <van-form>
+          <van-field
+            readonly
+            clickable
+            name="姓名"
+            label-align="left"
+            input-align="left"
+            :value="user.text"
+            label="姓名"
+            placeholder="点击选择用户"
+            @click="showPicker = true"
+          />
+          <van-popup v-model="showPicker" position="bottom">
+            <van-picker
+              show-toolbar
+              @change="onChange"
+              :columns="users"
+              @cancel="showPicker = false"
+              @confirm="showPicker = false"
+            />
+          </van-popup>
 
-        <van-field
-          v-model="reward_score"
-          type="number"
-          input-align="left"
-          label-align="left"
-          name="奖分"
-          label="奖分"
-          readonly
-          placeholder="0"
-        />
-        <van-field
-          v-model="pub_score"
-          type="number"
-          input-align="left"
-          label-align="left"
-          readonly
-          name="罚分"
-          label="罚分"
-          placeholder="0"
-        />
+          <van-field
+            v-model="reward_score"
+            type="number"
+            input-align="left"
+            label-align="left"
+            name="奖分"
+            label="奖分"
+            readonly
+            placeholder="0"
+          />
+          <van-field
+            v-model="pub_score"
+            type="number"
+            input-align="left"
+            label-align="left"
+            readonly
+            name="罚分"
+            label="罚分"
+            placeholder="0"
+          />
 
-        <van-submit-bar
-          :price="total"
-          label="总分："
-          ext-align="left"
-          button-text="提交分数"
-          @submit="onSubmit"
-        />
-      </van-form>
-    </van-cell-group>
+          <van-submit-bar
+            :price="total"
+            label="总分："
+            ext-align="left"
+            button-text="提交分数"
+            @submit="onSubmit"
+          />
+        </van-form>
+      </van-cell-group>
     </van-skeleton>
   </div>
 </template>
@@ -68,7 +80,7 @@
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       reward_score: 0,
       pub_score: 0,
       showPicker: false,
@@ -93,24 +105,23 @@ export default {
   },
   methods: {
     getUsers() {
-      let that = this     
-      this.$http.post("/user/info/query", this.paging).then(res=>{
+      let that = this;
+      this.$http.post("/user/info/query", this.paging).then((res) => {
         let users = [];
         res.items.forEach(function (item) {
           users.push({ text: item.name, id: item.uid });
         });
         that.users = users;
         that.user = users[0];
-        if (that.$route.params.id){
-          that.users.forEach(function(u){
-            if (u.id==that.$route.params.id){
-                that.user = u
+        if (that.$route.params.id) {
+          that.users.forEach(function (u) {
+            if (u.id == that.$route.params.id) {
+              that.user = u;
             }
-          })
+          });
         }
-        that.loading=false
-      })
-     
+        that.loading = false;
+      });
     },
     onClickLeft() {
       this.$router.push("/home/index");
@@ -119,7 +130,11 @@ export default {
       let rewardItem = this.rewardItem;
       let reward = this.$enum.get("reward_info") || [];
       reward.forEach(function (item) {
-        rewardItem.push({ text:item.name+"("+  item.value +"分)", id: item.id, value: item.value });
+        rewardItem.push({
+          text: item.name + "(" + item.value + "分)",
+          id: item.id,
+          value: item.value,
+        });
       });
 
       let punItem = this.punItem;
@@ -145,19 +160,19 @@ export default {
     onChange(p, value, i) {
       this.showPicker = false;
       this.user = value;
-
     },
     onSubmit() {
-      let input={uid:this.user.id,score:this.total/100}
-      let that=this
-      this.$http.post("/score/record/add", input).then(v=>{
-        that.$msg.success("保存成功")
-        that.$router.push("/home/index");
-      }).catch(ex=>{
-         that.$msg.fail("保存失败")
-      })
-
-
+      let input = { uid: this.user.id, score: this.total / 100 };
+      let that = this;
+      this.$http
+        .post("/score/record/add", input)
+        .then((v) => {
+          that.$msg.success("保存成功");
+          that.$router.push("/home/index");
+        })
+        .catch((ex) => {
+          that.$msg.fail("保存失败");
+        });
     },
     onSelectChanged(data) {
       var reward = 0;

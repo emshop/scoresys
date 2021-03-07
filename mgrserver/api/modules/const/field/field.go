@@ -1,6 +1,9 @@
 package field
 
 
+//FieldBatchID 字段加入批次编号的数据库名称
+const FieldBatchID = "batch_id"
+
 //FieldBirthday 字段出生日期的数据库名称
 const FieldBirthday = "birthday"
 
@@ -9,6 +12,9 @@ const FieldCTp = "c_tp"
 
 //FieldCategory 字段分类的数据库名称
 const FieldCategory = "category"
+
+//FieldContent 字段内容的数据库名称
+const FieldContent = "content"
 
 //FieldCreateTime 字段创建时间的数据库名称
 const FieldCreateTime = "create_time"
@@ -42,6 +48,9 @@ const FieldRwID = "rw_id"
 
 //FieldRwName 字段名称的数据库名称
 const FieldRwName = "rw_name"
+
+//FieldRwpuID 字段奖励、惩罚编号的数据库名称
+const FieldRwpuID = "rwpu_id"
 
 //FieldScore 字段变动分数的数据库名称
 const FieldScore = "score"

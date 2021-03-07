@@ -118,7 +118,10 @@ func (u *ScoreRecordHandler) PutHandle(ctx hydra.IContext) (r interface{}) {
 var postScoreRecordCheckFields = map[string]interface{}{
 	field.FieldUid:"required",
 	field.FieldCTp:"required",
+	field.FieldRwpuID:"required",
 	field.FieldScore:"required",
+	field.FieldContent:"required",
+	field.FieldBatchID:"required",
 	}
 
 var getScoreRecordCheckFields = map[string]interface{}{
@@ -127,12 +130,14 @@ var getScoreRecordCheckFields = map[string]interface{}{
 
 var queryScoreRecordCheckFields = map[string]interface{}{
 	field.FieldUid:"required",
-	field.FieldCTp:"required",
+	field.FieldCreateTime:"required",
 	}
 
 var updateScoreRecordCheckFields = map[string]interface{}{
 	field.FieldCTp:"required",
+	field.FieldRwpuID:"required",
 	field.FieldScore:"required",
+	field.FieldContent:"required",
 	}
 
 

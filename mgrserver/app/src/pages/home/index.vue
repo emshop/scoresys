@@ -6,93 +6,127 @@
         <van-icon name="ellipsis" size="18" />
       </template>
     </van-nav-bar>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <van-cell-group title="我的宝宝">
+        <van-cell
+          is-link
+          clickable
+          center
+          :url="'/score/index/' + item.uid"
+          v-for="item in users.items"
+          v-bind:key="item.uid"
+        >
+          <template>
+            <van-row type="flex" align="center">
+              <van-col span="5" align="center">
+                <van-image
+                  :src="item.url"
+                  round
+                  fit="cover"
+                  width="4.5rem"
+                  height="4.5rem"
+                >
+                </van-image>
+              </van-col>
+              <van-col span="3"> </van-col>
+              <van-col span="12">
+                <div class="h6">{{ item.name }}</div>
+                <div class="text-muted">{{ getGrowAge(item.birthday) }}</div>
+                <div>
+                  总分:<span class="text-danger h6"> {{ item.score }}</span> 分
+                </div>
+              </van-col>
+            </van-row>
+          </template>
+        </van-cell>
+      </van-cell-group>
 
-    <van-cell-group title="我的宝宝">
-      <van-cell
-        is-link
-        clickable
-        center
-        :url="'/score/add/' + item.uid"
-        v-for="item in dataList.items"
-        v-bind:key="item.uid"
-      >
-        <!-- 使用 title 插槽来自定义标题 -->
-        <template>
-          <van-row type="flex" align="center">
-            <van-col span="5" align="center">
-              <van-image
-                :src="item.url"
-                round
-                fit="cover"
-                width="4.5rem"
-                height="4.5rem"
-              >
-              </van-image>
-            </van-col>
-            <van-col span="3"> </van-col>
-            <van-col span="12">
-              <div class="h6">{{ item.name }}</div>
-              <div class="text-muted">{{ getGrowAge(item.birthday) }}</div>
-              <div>
-                总分:<span class="text-danger h6"> {{ item.score }}</span> 分
-              </div>
-            </van-col>
-          </van-row>
-        </template>
-      </van-cell>
-    </van-cell-group>
-
-    <van-cell-group title="最近记录">
-      <van-collapse
-        v-for="r in records"
-        v-bind:key="r.id"
-        v-model="r.id"
-        accordion
-      >
-        <van-collapse-item :title="r.group" v-name="r.id" toggle="false">
-          <van-cell
-            center
-            v-for="rcd in r.items"
-            v-bind:key="rcd.id"
-            :value-class="rcd.type == 1 ? 'text-danger' : 'text-success'"
-            :title="rcd.score > 0 ? '+' + rcd.score + '分' : rcd.score + '分'"
-            :value="rcd.type == 1 ? '奖励' : '兑换'"
-            :label="rcd.label"
-          />
-        </van-collapse-item>
-      </van-collapse>
-    </van-cell-group>
+      <van-cell-group v-for="r in records" :title="r.group" v-bind:key="r.id">
+        <van-cell
+          center
+          v-for="rcd in r.items"
+          v-bind:key="rcd.id"
+          :value-class="rcd.c_tp == '0' ? 'text-danger' : 'text-success'"
+          :title="rcd.score > 0 ? '+' + rcd.score + '分' : rcd.score + '分'"
+          :value="rcd.c_tp == '0' ? '奖励' : '兑换'"
+          :label="rcd.content + '(' + getUserName(rcd.uid) + ')'"
+        />
+      </van-cell-group>
+    </van-pull-refresh>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      isLoading: false,
       activeNames: "1",
       paging: { ps: 10, pi: 1 },
-      dataList: { items: [] },
-      records: [
-        {
-          group: "2020-03-06",
-          id: "1",
-          items: [
-            { id: 1, score: 5, type: 1, label: "超级乖宝宝" },
-            { id: 1, score: -10, type: 3, label: "游戏币" },
-          ],
-        },
-      ],
+      users: { items: [] },
+      records: [],
     };
   },
   created() {},
   mounted() {
     this.query();
+    this.queryRecords();
   },
   methods: {
+    onRefresh() {
+      this.paging.pi = 1;
+      this.query();
+    },
+    queryRecords() {
+      let that = this;
+      let recordList = {};
+      var curr_date = new Date();
+      curr_date.setDate(curr_date.getDate() - 1);
+      this.$http
+        .post("/score/record/q", {
+          create_time: this.dateFormat(curr_date, "yyyy-MM-dd"),
+          pi: this.paging.pi,
+          ps: this.paging.ps,
+        })
+        .then((res) => {
+          that.isLoading = false;
+          recordList.items = res.items;
+          let lst = {};
+          recordList.items.forEach((item) => {
+            let dt = that.dateFormat(item.create_time, "yyyy-MM-dd");
+            if (!lst[dt]) {
+              lst[dt] = [];
+            }
+            lst[dt].push(item);
+          });
+          that.records = [];
+          for (var dt in lst) {
+            that.records.push({
+              group: dt,
+              id: lst[dt].uid,
+              items: lst[dt],
+            });
+          }
+        });
+    },
+
     query() {
+      let that = this;
       this.$http.post("/user/info/query", this.paging).then((res) => {
-        this.dataList.items = res.items;
-        this.dataList.count = res.count;
+        that.isLoading = false;
+        that.users.items = res.items;
+        that.users.count = res.count;
+        this.queryRecords();
       });
+    },
+    getUserName(uid) {
+      let name = "";
+      this.users.items.forEach(function (item) {
+        if (item.uid == uid) {
+          name = item.name;
+          return;
+        }
+      });
+      return name;
     },
     getGrowAge(birthday) {
       var now = new Date();
@@ -142,6 +176,39 @@ export default {
       }
       var dateStr = gapYear + "岁 " + gapMonth + "个月" + myDay + "天";
       return dateStr;
+    },
+
+    dateFormat(date, fmt) {
+      if (!date) {
+        return "";
+      }
+      let d = new Date(Date.parse(date));
+      var o = {
+        "M+": d.getMonth() + 1, // 月份
+        "d+": d.getDate(), // 日
+        "h+": d.getHours(), // 小时
+        "m+": d.getMinutes(), // 分
+        "s+": d.getSeconds(), // 秒
+        "q+": Math.floor((d.getMonth() + 3) / 3), // 季度
+        S: d.getMilliseconds(), // 毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (d.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length === 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
     },
     getDaysOfMonth(dateStr) {
       var date = new Date(dateStr);

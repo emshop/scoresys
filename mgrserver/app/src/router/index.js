@@ -41,6 +41,12 @@ export default new Router({
       component: () => import('../pages/score/add.vue'),
       meta: { title: "积分" }
       },
+      {
+        path: '/score/index/:id',
+        name: '/score/index',
+        component: () => import('../pages/score/index.vue'),
+        meta: { title: "积分" }
+        },
   ]
 })
 

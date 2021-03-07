@@ -57,17 +57,6 @@ e:枚举参数
 
 
 
-###  3. 礼品信息[sc_gif_info]
-
-| 字段名      | 类型         | 默认值  | 为空  |      约束       | 描述     |
-| ----------- | ------------ | :-----: | :---: | :-------------: | :------- |
-| gif_id      | number(10)   |  1000   |  否   |   SEQ,PK,l,r    | 编号     |
-| gif_name    | varchar2(64) |         |  否   |  DN,c,u,r,l,q   | 礼品名称 |
-| score       | number(10)   |    0    |  否   |   DI,c,u,r,l    | 分数     |
-| status      | number(1)    |    0    |  否   | c,u,r,l,q,sl,cc | 状态     |
-| create_time | date         | sysdate |  否   |       l,r       | 创建时间 |
-
-
 ###  4. 用户信息[sc_user_info]
 
 | 字段名      | 类型          | 默认值  | 为空  |      约束      | 描述     |
@@ -83,14 +72,16 @@ e:枚举参数
 
 ###  5. 分数记录[sc_score_record]
 
-| 字段名      | 类型       | 默认值  | 为空  |          约束           | 描述     |
-| ----------- | ---------- | :-----: | :---: | :---------------------: | :------- |
-| rc_id       | number(10) |         |  否   |        PK,DI,SEQ        | 编号     |
-| uid         | number(10) |         |  否   | DN,sl(sc_user_info),q,c | 用户     |
-| c_tp        | number(1)  |         |  是   |     l,u,c,r,q,sl,c      | 类型     |
-| score       | number(10) |         |  否   |   l,u,c,r,c,sl(#c_tp)   | 变动分数 |
-| remain      | number(20) |    0    |  是   |            r            | 剩余     |
-| create_time | date       | sysdate |  否   |           r,l           | 创建时间 |
+| 字段名      | 类型         | 默认值  | 为空  |          约束           | 描述           |
+| ----------- | ------------ | :-----: | :---: | :---------------------: | :------------- |
+| rc_id       | number(10)   |         |  否   |        PK,DI,SEQ        | 编号           |
+| uid         | number(10)   |         |  否   | DN,l,r,sl(sc_user_info),q,c | 用户           |
+| c_tp        | number(1)    |         |  是   |      l,u,c,r,sl,c       | 类型           |
+| rwpu_id     | number(20)   |         |  是   |      l,u,c,r,sl,c       | 奖励、惩罚编号 |
+| score       | number(10)   |         |  否   |   l,u,c,r,c,sl(#c_tp)   | 变动分数       |
+| content     | varchar2(64) |         |  否   |        l,u,c,r,c        | 内容           |
+| batch_id    | number(20)   |    0    |  是   |           c,r           | 加入批次编号   |
+| create_time | date         | sysdate |  否   |   r,l,q(f:yyyy-MM-dd)   | 创建时间       |
 
 ### 6. 字典配置[sc_dict_info]
 
@@ -102,3 +93,9 @@ e:枚举参数
 | type    | varchar2(32) |        |  否   |    q,c,u,l,r     | 类型   |
 | status  | number(1)    |   0    |  否   | q,c,u,l,r,cc,sl  | 状态   |
 | sort_no | number(2)    |   0    |  否   |     c,u,l,r      | 排序值 |
+
+
+
+生成DB gitcli db create ../docs/db.md ./api/modules/const/db/scheme --gofile --drop --cover --seqfile
+生成代码 gitcli md code entity ./docs/db.md -t
+生成SQL: gitcli md sql select ./docs/db.md -t ots_trade_order
