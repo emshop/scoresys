@@ -30,7 +30,7 @@ func init() {
 	hydra.Conf.API("8091").Header(header.WithCrossDomain()).
 		Static(static.WithAutoRewrite(), static.WithEmbed("web/dist", mgrweb))
 
-	hydra.Conf.Vars().DB().MySQLByConnStr("db", "scoresys:1qaz2wsxA@tcp(rm-bp1jncd360df9dqvy.mysql.rds.aliyuncs.com:3306)/scoresys?charset=utf8")
+	hydra.Conf.Vars().DB().MySQLByConnStr("db", "scoresys:a1qaz2wsxA@tcp(rm-abp1jncd360df9dqvy.mysql.rds.aliyuncs.com:3306)/scoresys?charset=utf8")
 
 	//启动时参数配置检查
 	App.OnStarting(func(appConf app.IAPPConf) error {

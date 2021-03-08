@@ -145,7 +145,6 @@ export default {
       this.gifItems = gifItems;
     },
     onClick(item) {
-      console.info(item)
       this.input.content = item.name
       this.input.score = item.value
     },

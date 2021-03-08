@@ -68,7 +68,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.query();
+    this.query();    
     this.queryRecords();
   },
   methods: {
@@ -174,7 +174,7 @@ export default {
       if (gapYear < 0) {
         gapYear = 0;
       }
-      var dateStr = gapYear + "岁 " + gapMonth + "个月" + myDay + "天";
+      var dateStr = gapYear + "岁 " + gapMonth + "个月" + gapDay + "天";
       return dateStr;
     },
 

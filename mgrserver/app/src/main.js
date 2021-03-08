@@ -22,9 +22,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 Vue.config.productionTip = false;
 
-router.beforeEach((to, from, next) => { 
-   document.title = Vue.prototype.$env.conf.system.name
- 
+
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  Vue.prototype.$sys.checkAuthCode(to)
+  if (to.path != "/") {
+      document.title = Vue.prototype.$sys.getTitle(to.path)
+  }
   next()
 })
 
