@@ -26,7 +26,7 @@
             <van-button
               plain
               :type="item.type"
-              style="margin-right: 10px"
+               style="margin:0 10px 5px 0"
               class="badge-icon"
               size="small"
               :class="item.selected"
