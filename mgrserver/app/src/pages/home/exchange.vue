@@ -63,7 +63,24 @@
           >提交</van-button
         >
       </div>
+   
     </van-form>
+       <van-cell-group title="选择项目">
+        <van-cell>
+          <van-button
+            plain
+            :type="item.type"
+            style="margin:0 10px 5px 0"
+            class="badge-icon"
+            size="small"
+            :class="item.selected"
+            @click="onClick(item)"
+            v-for="item in gifItems"
+            v-bind:key="item.id"
+            >{{ item.text }}</van-button
+          >
+        </van-cell>
+      </van-cell-group>
   </div>
 </template>
 
@@ -71,17 +88,18 @@
 export default {
   data() {
     return {
-      input: {},
+      input: {content:"",score:""},
+      gifItems: [],
       paging: { ps: 10, pi: 1 },
       showPicker: false,
       user: {},
-
       users: [],
     };
   },
   created() {},
   mounted() {
     this.getUsers();
+    this.queryGif();
   },
   methods: {
     onSubmit() {
@@ -111,6 +129,24 @@ export default {
     },
     onClickLeft() {
       this.$router.push("/home/index");
+    },
+    queryGif() {
+      let gifItems = [];
+      let gifs = this.$enum.get("gif_info") || [];
+      gifs.forEach(function (item) {
+        gifItems.push({
+          name: item.name,
+          text: item.name + "(" + item.value + "分)",
+          id: item.id,
+          type: "default",
+          value: item.value,
+        });
+      });
+      this.gifItems = gifItems;
+    },
+    onClick(item) {
+      this.input.content = item.name
+      this.input.score = item.value
     },
     getUsers() {
       let that = this;

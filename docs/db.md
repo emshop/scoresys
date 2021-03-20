@@ -55,6 +55,15 @@ e:枚举参数
 | status      | number(1)    |    0    |  否   | u,l,r,c,q,sl,cc | 状态     |
 | create_time | date         | sysdate |  否   |       l,r       | 创建时间 |
 
+###  3. 礼品信息[sc_gif_info]
+
+| 字段名      | 类型         | 默认值  | 为空  |      约束       | 描述     |
+| ----------- | ------------ | :-----: | :---: | :-------------: | :------- |
+| gif_id      | number(10)   |  1000   |  否   |   SEQ,PK,l,r    | 编号     |
+| gif_name    | varchar2(64) |         |  否   |  DN,c,u,r,l,q   | 礼品名称 |
+| score       | number(10)   |    0    |  否   |   DI,c,u,r,l    | 分数     |
+| status      | number(1)    |    0    |  否   | c,u,r,l,q,sl,cc | 状态     |
+| create_time | date         | sysdate |  否   |       l,r       | 创建时间 |
 
 
 ###  4. 用户信息[sc_user_info]
